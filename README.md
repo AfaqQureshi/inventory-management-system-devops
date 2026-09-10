@@ -178,3 +178,4 @@ Possible future improvements include:
 ## Author
 
 Developed as a full-stack technical assignment using React, Node.js, Express, and MongoDB.
+# inventory-management-system
