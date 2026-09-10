@@ -36,7 +36,34 @@ function App() {
   };
 
   useEffect(() => {
-    loadProducts();
+    let isMounted = true;
+
+    const loadInitialProducts = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const data = await getProducts();
+
+        if (isMounted) {
+          setProducts(data);
+        }
+      } catch (error) {
+        if (isMounted) {
+          setError(error.message);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadInitialProducts();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const categories = useMemo(() => {

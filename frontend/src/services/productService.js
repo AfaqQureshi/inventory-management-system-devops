@@ -1,71 +1,63 @@
 const API_URL = "http://localhost:5000/products";
 
-export const getProducts = async () => {
-  const response = await fetch(API_URL);
+const request = async (url, options) => {
+  let response;
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
+  try {
+    response = await fetch(url, options);
+  } catch {
+    throw new Error(
+      "Unable to connect to the backend. Make sure the API is running on port 5000."
+    );
   }
 
-  return response.json();
+  let data = null;
+
+  try {
+    data = await response.json();
+  } catch {
+    if (!response.ok) {
+      throw new Error("The server returned an invalid response.");
+    }
+  }
+
+  if (!response.ok) {
+    throw new Error(data?.message || "The request could not be completed.");
+  }
+
+  return data;
+};
+
+export const getProducts = async () => {
+  return request(API_URL);
 };
 
 export const addProduct = async (product) => {
-  const response = await fetch(API_URL, {
+  return request(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(product)
   });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Failed to add product");
-  }
-
-  return data;
 };
 
 export const updateProduct = async (id, product) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  return request(`${API_URL}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(product)
   });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Failed to update product");
-  }
-
-  return data;
 };
 
 export const deleteProduct = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  return request(`${API_URL}/${id}`, {
     method: "DELETE"
   });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Failed to delete product");
-  }
-
-  return data;
 };
 
 export const getLowStockProducts = async () => {
-  const response = await fetch(`${API_URL}/low-stock`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch low-stock products");
-  }
-
-  return response.json();
+  return request(`${API_URL}/low-stock`);
 };

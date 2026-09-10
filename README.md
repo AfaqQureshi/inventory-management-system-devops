@@ -48,9 +48,9 @@ inventory-management/
 │   │   └── Product.js
 │   ├── routes/
 │   │   └── productRoutes.js
-│   ├── .env
 │   ├── .gitignore
 │   ├── package.json
+│   ├── package-lock.json
 │   └── server.js
 │
 ├── frontend/
@@ -70,7 +70,7 @@ inventory-management/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-github-repository-url>
+git clone https://github.com/vinayaka2003/inventory-management-system.git
 cd inventory-management
 ```
 
@@ -149,7 +149,7 @@ Low-stock products are highlighted in the interface.
 The application handles:
 
 - Missing required fields
-- Negative price or quantity
+- Negative price, quantity, or minimum stock
 - Invalid product IDs
 - Product not found
 - Invalid API routes
@@ -160,7 +160,7 @@ The application handles:
 - Product names and categories are entered as text.
 - Price, quantity, and minimum stock cannot be negative.
 - MongoDB Atlas is used as the database.
-- Authentication is outside the scope of this assignment.
+- Authentication and authorization are outside the scope of this assignment.
 - The application is intended to run locally.
 
 ## Future Improvements
@@ -178,4 +178,3 @@ Possible future improvements include:
 ## Author
 
 Developed as a full-stack technical assignment using React, Node.js, Express, and MongoDB.
-# inventory-management-system
