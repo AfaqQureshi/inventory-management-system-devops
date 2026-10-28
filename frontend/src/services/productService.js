@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:5000/products";
-
+const API_URL = "/products";
 const request = async (url, options) => {
   let response;
 
